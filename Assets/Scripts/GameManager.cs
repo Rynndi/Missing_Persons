@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
   [SerializeField] private int difficulty = 4;
   [SerializeField] private Transform gameHolder;
   [SerializeField] private Transform piecePrefab;
+  [SerializeField] private float puzzleWorldHeight = 6f;
 
   [Header("UI Elements")]
   [SerializeField] private List<Texture2D> imageTextures;
@@ -77,9 +78,12 @@ public class GameManager : MonoBehaviour {
   // Create all the jigsaw pieces
   void CreateJigsawPieces(Texture2D jigsawTexture) {
     // Calculate piece sizes based on the dimensions.
-    height = 1f / dimensions.y;
+    float scale = puzzleWorldHeight;
+
+    height = scale / dimensions.y;
+
     float aspect = (float)jigsawTexture.width / jigsawTexture.height;
-    width = aspect / dimensions.x;
+    width = (scale * aspect) / dimensions.x;
 
     for (int row = 0; row < dimensions.y; row++) {
       for (int col = 0; col < dimensions.x; col++) {
