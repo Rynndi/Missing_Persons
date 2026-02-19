@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour {
   [Header("Game Elements")]
@@ -14,11 +15,17 @@ public class GameManager : MonoBehaviour {
   [SerializeField] private List<Texture2D> imageTextures;
   [SerializeField] private Transform levelSelectPanel;
   [SerializeField] private Image levelSelectPrefab;
+  [SerializeField] private GameObject playAgainButton;
 
   private List<Transform> pieces;
   private Vector2Int dimensions;
   private float width;
   private float height;
+
+  private Transform draggingPiece = null;
+  private Vector3 offset;
+
+  private int piecesCorrect;
 
   void Start() {
     // Create the UI
@@ -40,8 +47,17 @@ public class GameManager : MonoBehaviour {
     // Calculate the size of each jigsaw piece, based on a difficulty setting.
     dimensions = GetDimensions(jigsawTexture, difficulty);
 
-    // Create the pieces of the correct size with the correct texture
+    // Create the pieces of the correct size with the correct texture.
     CreateJigsawPieces(jigsawTexture);
+
+    // Place the pieces randomly into the visible area.
+    Scatter();
+
+    // Update the border to fit the chosen puzzle.
+    UpdateBorder();
+
+    // As we're starting the puzzle there will be no correct pieces.
+    piecesCorrect = 0;
   }
 
   Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty) {
@@ -96,5 +112,120 @@ public class GameManager : MonoBehaviour {
         piece.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", jigsawTexture);
       }
     }
+  }
+
+  // Place the pieces randomly in the visible area.
+  private void Scatter() {
+    // Calculate the visible orthographic size of the screen.
+    float orthoHeight = Camera.main.orthographicSize;
+    float screenAspect = (float)Screen.width / Screen.height;
+    float orthoWidth = (screenAspect * orthoHeight);
+
+    // Ensure pieces are away from the edges.
+    float pieceWidth = width * gameHolder.localScale.x;
+    float pieceHeight = height * gameHolder.localScale.y;
+
+    orthoHeight -= pieceHeight;
+    orthoWidth -= pieceWidth;
+
+    // Place each piece randomly in the visible area.
+    foreach (Transform piece in pieces) {
+      float x = Random.Range(-orthoWidth, orthoWidth);
+      float y = Random.Range(-orthoHeight, orthoHeight);
+      piece.position = new Vector3(x, y, -1);
+    }
+  }
+
+  // Update the border to fit the chosen puzzle.
+  private void UpdateBorder() {
+    LineRenderer lineRenderer = gameHolder.GetComponent<LineRenderer>();
+
+    // Calculate half sizes to simplify the code.
+    float halfWidth = (width * dimensions.x) / 2f;
+    float halfHeight = (height * dimensions.y) / 2f;
+
+    // We want the border to be behind the pieces.
+    float borderZ = 0f;
+
+    // Set border vertices, starting top left, going clockwise.
+    lineRenderer.SetPosition(0, new Vector3(-halfWidth, halfHeight, borderZ));
+    lineRenderer.SetPosition(1, new Vector3(halfWidth, halfHeight, borderZ));
+    lineRenderer.SetPosition(2, new Vector3(halfWidth, -halfHeight, borderZ));
+    lineRenderer.SetPosition(3, new Vector3(-halfWidth, -halfHeight, borderZ));
+
+    // Set the thickness of the border line.
+    lineRenderer.startWidth = 0.1f;
+    lineRenderer.endWidth = 0.1f;
+
+    // Show the border line.
+    lineRenderer.enabled = true;
+  }
+
+  // Update is called once per frame
+  void Update() {
+    var mouse = Mouse.current;
+    if (mouse == null) return;
+
+    if (mouse.leftButton.wasPressedThisFrame) {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(mouse.position.ReadValue()), Vector2.zero);
+        if (hit) {
+            draggingPiece = hit.transform;
+            offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
+            offset += Vector3.back;
+        }
+    }
+
+    if (draggingPiece && mouse.leftButton.wasReleasedThisFrame) {
+        SnapAndDisableIfCorrect();
+        draggingPiece.position += Vector3.forward;
+        draggingPiece = null;
+    }
+
+    if (draggingPiece) {
+        Vector3 newPosition = Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
+        newPosition += offset;
+        draggingPiece.position = newPosition;
+    }
+  }
+
+  private void SnapAndDisableIfCorrect() {
+    // We need to know the index of the piece to determine it's correct position.
+    int pieceIndex = pieces.IndexOf(draggingPiece);
+
+    // The coordinates of the piece in the puzzle.
+    int col = pieceIndex % dimensions.x;
+    int row = pieceIndex / dimensions.x;
+
+    // The target position in the non-scaled coordinates.
+    Vector2 targetPosition = new((-width * dimensions.x / 2) + (width * col) + (width / 2),
+                                 (-height * dimensions.y / 2) + (height * row) + (height / 2));
+
+    // Check if we're in the correct location.
+    if (Vector2.Distance(draggingPiece.localPosition, targetPosition) < (width / 2)) {
+      // Snap to our destination.
+      draggingPiece.localPosition = targetPosition;
+
+      // Disable the collider so we can't click on the object anymore.
+      draggingPiece.GetComponent<BoxCollider2D>().enabled = false;
+
+      // Increase the number of correct pieces, and check for puzzle completion.
+      piecesCorrect++;
+      if (piecesCorrect == pieces.Count) {
+        playAgainButton.SetActive(true);
+      }
+    }
+  }
+
+  public void RestartGame() {
+    // Destroy all the puzzle pieces.
+    foreach (Transform piece in pieces) {
+      Destroy(piece.gameObject);
+    }
+    pieces.Clear();
+    // Hide the outline
+    gameHolder.GetComponent<LineRenderer>().enabled = false;
+    // Show the level select UI.
+    playAgainButton.SetActive(false);
+    levelSelectPanel.gameObject.SetActive(true);
   }
 }
