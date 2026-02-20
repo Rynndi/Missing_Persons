@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+--- !u!1 &457205828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 457205830}
+  - component: {fileID: 457205829}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &457205829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457205828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6161ef17ce4c7434c830497897bd75db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  difficulty: 4
+  gameHolder: {fileID: 2002308744}
+  piecePrefab: {fileID: 1826028823375998442, guid: b2162e430aa264710a2312393514a678, type: 3}
+  puzzleWorldHeight: 6
+  imageTextures:
+  - {fileID: 2800000, guid: 4391b6e559955490fa6814a6c91cdac5, type: 3}
+  - {fileID: 2800000, guid: 8f38042a9c06041e8acb5f07be82d197, type: 3}
+  levelSelectPanel: {fileID: 1812159383}
+  levelSelectPrefab: {fileID: 7082830147509481389, guid: fdf1048de9a9b4e669c3ff53035dd5cc, type: 3}
+  playAgainButton: {fileID: 1530155321}
+--- !u!4 &457205830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457205828}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 615, y: 463.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
