@@ -1,5 +1,7 @@
 
 
+using UnityEngine.UIElements;
+
 public class Checklist : UIElementTemplate
 {
     protected override void deinitListeners()
@@ -9,6 +11,6 @@ public class Checklist : UIElementTemplate
 
     protected override void generateContent()
     {
-        throw new System.NotImplementedException();
+
     }
 }
