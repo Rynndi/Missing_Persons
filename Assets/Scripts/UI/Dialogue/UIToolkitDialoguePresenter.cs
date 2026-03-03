@@ -37,10 +37,10 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
     
 
     public VisualElement root;
-    public bool contentCompleted = false;
 
     YarnspinnerTypewriter typewriter;
     Label charName;
+    bool generated = false;
 
 
 
@@ -84,10 +84,13 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
 
     private void generateContent()
     {
+        generated = false;
         charName = Create<Label>("charName");
         typewriter = new YarnspinnerTypewriter(ActionMarkupHandlers, typewriterSpeed, "dialogueBox");
+        typewriter.text = "default text for testing";
         root.Add(charName);
         root.Add(typewriter);
+        generated = true;
     }
 
 
@@ -104,6 +107,12 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
 
     public override async YarnTask RunLineAsync(LocalizedLine line, LineCancellationToken token)
     {
+        while (!generated)
+        {
+            await YarnTask.Yield();
+        }
+
+        Debug.Log("Attempting to run a line");
          if (gameObject.activeInHierarchy == false)
         {
             // This line view isn't active; it should immediately report that

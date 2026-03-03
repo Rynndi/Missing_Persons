@@ -1,0 +1,16 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Stylesheets/PauseMenu.uss?fileID=7433441132597879392&amp;guid=7c395f46885409c438ee9cdc8a7eb3cf&amp;type=3#PauseMenu"/>
+    <Style src="project://database/Assets/Scripts/UI/Stylesheets/Menu.uss?fileID=7433441132597879392&amp;guid=5c437f0c96ba1084882cba0bde7f46ff&amp;type=3#Menu"/>
+    <Style src="project://database/Assets/Scripts/UI/Stylesheets/Checklist.uss?fileID=7433441132597879392&amp;guid=8ec739d154b663f458b2ed12b36310fb&amp;type=3#Checklist"/>
+    <ui:VisualElement class="PauseRoot">
+        <ui:VisualElement class="ChecklistRoot PausePopup">
+            <ui:VisualElement class="TextContainer">
+                <ui:Label text="MISSING PERSONS" class="TitleText"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" class="BottomContainer">
+                <ui:Image class="Settings ExitButton"/>
+                <ui:Image class="Pause ResumeButton"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -29,6 +29,7 @@ public partial class YarnspinnerTypewriter : Label
 
     public async YarnTask RunTypewriter(MarkupParseResult line, CancellationToken cancellationToken)
     {
+        Debug.Log("Typewriter attempting to update");
         int visibleCharacters = 0;
         string sourceText = line.Text;
         double accumulatedDelay = speed;
