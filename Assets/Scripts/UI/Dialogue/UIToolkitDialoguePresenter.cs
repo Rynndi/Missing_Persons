@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Yarn.Markup;
@@ -41,6 +42,23 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
     YarnspinnerTypewriter typewriter;
     Label charName;
 
+
+
+    [SerializeField] List<ToolkitMarkupHandler> eventHandlers = new List<ToolkitMarkupHandler>();
+        private List<IToolkitMarkupHandler> ActionMarkupHandlers
+        {
+            get
+            {
+                var pauser = new PauseEventProcessor();
+                List<IToolkitMarkupHandler> ActionMarkupHandlers = new()
+                {
+                    
+                };
+                ActionMarkupHandlers.AddRange(eventHandlers);
+                return ActionMarkupHandlers;
+            }
+        }
+
     void Start()
     {
         Debug.Log("new template opened");
@@ -67,13 +85,12 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
     private void generateContent()
     {
         charName = Create<Label>("charName");
-        typewriter = new YarnspinnerTypewriter(typewriterSpeed, "dialogueBox");
+        typewriter = new YarnspinnerTypewriter(ActionMarkupHandlers, typewriterSpeed, "dialogueBox");
         root.Add(charName);
         root.Add(typewriter);
     }
 
 
-    
 
     public override YarnTask OnDialogueCompleteAsync()
     {

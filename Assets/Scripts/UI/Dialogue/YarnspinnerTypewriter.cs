@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,16 +11,20 @@ using Yarn.Unity;
 public partial class YarnspinnerTypewriter : Label
 {
     float speed = 0.3f;
+    public List<IToolkitMarkupHandler> ActionMarkupHandlers { get; set; } = new List<IToolkitMarkupHandler>();
+
 
     public YarnspinnerTypewriter()
     {
+        
     }
 
-    public YarnspinnerTypewriter(float speed = 0.3f, string className = "")
+    public YarnspinnerTypewriter(List<IToolkitMarkupHandler> handler, float speed = 0.3f, string className = "")
     {
         this.speed = speed;
         if (className != "")
             AddToClassList(className);
+        ActionMarkupHandlers = handler;
     }
 
     public async YarnTask RunTypewriter(MarkupParseResult line, CancellationToken cancellationToken)
@@ -28,6 +33,12 @@ public partial class YarnspinnerTypewriter : Label
         string sourceText = line.Text;
         double accumulatedDelay = speed;
         int totalCharCount = sourceText.Length;
+
+        foreach (IToolkitMarkupHandler actionMarkupHandler in ActionMarkupHandlers)
+        {
+                actionMarkupHandler.OnLineDisplayBegin(line, this);
+        }
+
 
         for (int i = 0; i < totalCharCount; i++)
         {
@@ -39,19 +50,39 @@ public partial class YarnspinnerTypewriter : Label
                 accumulatedDelay += timeAsDouble - timeBeforeYield;
             }
 
-            if (cancellationToken.IsCancellationRequested)
-                break;
+            foreach (IToolkitMarkupHandler actionMarkupHandler2 in ActionMarkupHandlers)
+            {
+                await actionMarkupHandler2.OnCharacterWillAppear(i, line, cancellationToken).SuppressCancellationThrow();
+            }
 
             visibleCharacters++;
             text = sourceText.Substring(0, visibleCharacters) + "<alpha=#00>" + sourceText.Substring(visibleCharacters);
             accumulatedDelay -= speed;
         }
+
         text = sourceText;
+
+        foreach (IToolkitMarkupHandler actionMarkupHandler3 in ActionMarkupHandlers)
+        {
+            actionMarkupHandler3.OnLineDisplayComplete();
+        }
     }
 
     public void PrepareForContent(MarkupParseResult line)
     {
-        text = line.Text.Substring(0, 0) + "<alpha=#00>"+line.Text.Substring(0);
+        text = line.Text.Substring(0, 0) + "<alpha=#00>" + line.Text.Substring(0);
+        foreach (IToolkitMarkupHandler actionMarkupHandler in ActionMarkupHandlers)
+        {
+            actionMarkupHandler.OnPrepareForLine(line, this);
+        }
+    }
+
+    public void ContentWillDismiss()
+    {
+        foreach (IToolkitMarkupHandler actionMarkupHandler in ActionMarkupHandlers)
+        {
+            actionMarkupHandler.OnLineWillDismiss();
+        }
     }
 
 }
