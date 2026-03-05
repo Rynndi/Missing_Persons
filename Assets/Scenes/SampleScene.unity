@@ -151,6 +151,7 @@ MonoBehaviour:
   difficulty: 4
   gameHolder: {fileID: 2002308744}
   piecePrefab: {fileID: 1826028823375998442, guid: b2162e430aa264710a2312393514a678, type: 3}
+  puzzleWorldHeight: 6
   imageTextures:
   - {fileID: 2800000, guid: 4391b6e559955490fa6814a6c91cdac5, type: 3}
   - {fileID: 2800000, guid: 8f38042a9c06041e8acb5f07be82d197, type: 3}
