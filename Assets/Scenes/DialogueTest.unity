@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIToolkitDialoguePresenter
   document: {fileID: 1599311754}
   masterStyleSheet: {fileID: 0}
-  individualStyleSheet: {fileID: 0}
+  individualStyleSheet: {fileID: 7433441132597879392, guid: 3ec200fd3909eb643b620a6b6199f0a5, type: 3}
   hideWhenNotDisplaying: 0
   typewriterEffect: 1
   nameDisplay: 0
