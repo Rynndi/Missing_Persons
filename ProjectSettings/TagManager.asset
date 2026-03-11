@@ -4,8 +4,14 @@
 TagManager:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   serializedVersion: 2
   tags: []
+=======
+  serializedVersion: 3
+  tags:
+  - Collectible
+>>>>>>> Stashed changes
 =======
   serializedVersion: 3
   tags:
