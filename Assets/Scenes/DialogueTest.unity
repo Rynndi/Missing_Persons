@@ -329,7 +329,7 @@ MonoBehaviour:
   typewriterEffect: 1
   nameDisplay: 0
   autoAdvance: 1
-  autoAdvanceDelay: 10
+  autoAdvanceDelay: 1
   typewriterSpeed: 0.03
   eventHandlers: []
 --- !u!114 &1599311754
