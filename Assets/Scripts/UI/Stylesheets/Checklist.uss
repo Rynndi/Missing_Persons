@@ -1,0 +1,91 @@
+:root {
+}
+
+.ChecklistRoot {
+    flex-grow: 1;
+    max-width: 180px;
+    max-height: 160px;
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-left: 0;
+    background-color: rgba(64, 55, 55, 0.55);
+    align-self: flex-end;
+    min-width: 170px;
+    min-height: 160px;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.Title {
+    background-color: rgba(70, 60, 60, 0.76);
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Electronic%20Highway%20Sign.TTF?fileID=12800000&guid=8a2b9e2a607dd2143b58c44bc32410b4&type=3#Electronic Highway Sign");
+    -unity-text-align: upper-center;
+    font-size: 20px;
+    padding-left: 2px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 8px;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.Row {
+    flex-grow: 1;
+    height: 10%;
+    min-height: 10%;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Electronic%20Highway%20Sign.TTF?fileID=12800000&guid=8a2b9e2a607dd2143b58c44bc32410b4&type=3#Electronic Highway Sign");
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-self: flex-start;
+    max-height: 15%;
+    -unity-text-align: middle-left;
+    margin-top: 6px;
+}
+
+.ChecklistLabel {
+    align-self: auto;
+    justify-content: flex-start;
+    align-items: auto;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-top: 2px;
+    padding-right: 1px;
+    font-size: 13px;
+}
+
+.ImageContainer {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.Checkbox {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-self: flex-end;
+    align-content: auto;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    background-image: url("project://database/Assets/UI/checkbox%201.png?fileID=2800000&guid=06226c0f728ad804b887035c9b6bfae1&type=3#checkbox 1");
+    margin-right: 5px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.33);
+    opacity: 0.3;
+}

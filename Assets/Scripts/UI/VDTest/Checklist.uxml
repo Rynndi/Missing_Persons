@@ -1,0 +1,32 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Checklist.uss?fileID=7433441132597879392&amp;guid=8ec739d154b663f458b2ed12b36310fb&amp;type=3#Checklist"/>
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="ChecklistRoot" class="ChecklistRoot">
+            <ui:Label text="Checklist" name="Title" class="Title"/>
+            <ui:VisualElement name="Row" class="Row">
+                <ui:Label text="kill the target" name="Label" class="ChecklistLabel"/>
+                <ui:VisualElement class="ImageContainer">
+                    <ui:Image name="Image" source="" class="Checkbox"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Row" class="Row">
+                <ui:Label text="clean the blood" name="Label" class="ChecklistLabel"/>
+                <ui:VisualElement class="ImageContainer">
+                    <ui:Image name="Image" source="" class="Checkbox"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Row" class="Row">
+                <ui:Label text="move the body" name="Label" class="ChecklistLabel"/>
+                <ui:VisualElement class="ImageContainer">
+                    <ui:Image name="Image" source="" class="Checkbox"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Row" class="Row">
+                <ui:Label text="fake evidence" name="Label" class="ChecklistLabel"/>
+                <ui:VisualElement class="ImageContainer">
+                    <ui:Image name="Image" source="" class="Checkbox"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,48 @@
+:root {
+}
+
+.MenuContainer {
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.Settings {
+    align-items: flex-start;
+    background-color: rgba(188, 188, 188, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-image: url("project://database/Assets/UI/Settings%20Square%20Button.png?fileID=2800000&guid=c5508f9a8967a754aa2c00ca857756db&type=3#Settings Square Button");
+    width: 30px;
+    height: 30px;
+    -unity-background-image-tint-color: rgba(148, 126, 126, 0.75);
+}
+
+.Pause {
+    -unity-background-image-tint-color: rgba(148, 126, 126, 0.75);
+    background-color: rgba(188, 188, 188, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-image: url("project://database/Assets/UI/Pause%20Square%20Button.png?fileID=2800000&guid=79e12a1996a99844bb7deea788042ed6&type=3#Pause Square Button");
+    width: 30px;
+    height: 30px;
+    margin-left: 17px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
