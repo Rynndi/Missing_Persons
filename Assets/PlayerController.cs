@@ -65,7 +65,14 @@ public class PlayerController : MonoBehaviour
         }
         // if (other.gameObject.CompareTag("Exit")) && (cm.ColCount == 0)
         // {
-            // UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        // UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         // }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+       if (collision.gameObject.CompareTag("Killer"))
+        {
+            GlobalEvents.deathTriggered();
+        }   
     }
 }

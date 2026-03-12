@@ -20,4 +20,7 @@ public static class GlobalEvents
 
     public static event Action onCollected;
     public static void TriggerCollected() => onCollected?.Invoke();
+
+    public static event Action onDeath;
+    public static void deathTriggered() => onDeath?.Invoke();
 }

@@ -5,7 +5,6 @@ using Yarn.Unity;
 
 public class GlobalManager : MonoBehaviour
 {
-    public static GlobalManager Instance;
     [SerializeField]
     public AILerp seeker;
 
@@ -15,16 +14,8 @@ public class GlobalManager : MonoBehaviour
     [SerializeField]
     public DialogueRunner dialogue;
 
-    void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(Instance);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+
+    private bool dead = false;
 
     void OnEnable()
     {
@@ -34,6 +25,7 @@ public class GlobalManager : MonoBehaviour
         GlobalEvents.onResumeInvoked += ResumeGame;
         GlobalEvents.pauseButtonClicked += PauseButtonClicked;
         GlobalEvents.resumeButtonClicked += ResumeGameClicked;
+        GlobalEvents.onDeath += deathOccurred;
     }
 
     void OnDisable()
@@ -44,6 +36,7 @@ public class GlobalManager : MonoBehaviour
         GlobalEvents.onResumeInvoked -= ResumeGame;
         GlobalEvents.pauseButtonClicked -= PauseButtonClicked;
         GlobalEvents.resumeButtonClicked -= ResumeGameClicked;
+        GlobalEvents.onDeath -= deathOccurred;
     }
 
     void StartGame()
@@ -98,8 +91,18 @@ public class GlobalManager : MonoBehaviour
     {
         if (player.count == 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);    
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
+        }
+        if(dead)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("InkScene");
         }
         GlobalEvents.TriggerResumeInvoked();
+    }
+
+    public void deathOccurred()
+    {
+        dialogue.StartDialogue("Death");
+        dead = true;
     }
 }
