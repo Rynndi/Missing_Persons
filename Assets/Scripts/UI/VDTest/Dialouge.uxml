@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/UI/Stylesheets/Dialogue.uss?fileID=7433441132597879392&amp;guid=3ec200fd3909eb643b620a6b6199f0a5&amp;type=3#Dialogue"/>
-    <ui:VisualElement class="new2">
-        <ui:Label text="Label" class="dialogue dialogueBox new new3"/>
+    <ui:VisualElement class="new2 bg">
+        <ui:Label text="Label" class="dialogue dialogueBox new new3 new4 new5" style="white-space: nowrap;"/>
     </ui:VisualElement>
 </ui:UXML>

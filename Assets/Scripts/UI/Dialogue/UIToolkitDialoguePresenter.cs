@@ -33,12 +33,12 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
     private int autoAdvanceDelay = 1;
 
     [SerializeField]
-    private float typewriterSpeed = 0.3f;
+    private float typewriterSpeed = 0.03f;
     
 
     public VisualElement root;
 
-    YarnspinnerTypewriter typewriter;
+    public YarnspinnerTypewriter typewriter;
     Label charName;
     bool generated = false;
 
