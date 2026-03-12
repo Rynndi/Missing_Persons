@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     float movementX;
     float movementY;
     [SerializeField] float speed = 5.0f;
     Rigidbody2D rb;
-    int score = 0;
+    public ColManager cm;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,6 +16,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // animator = GetComponent<Animator>();
         // spriteRenderer = GetComponent<SpriteRenderer>();
+        // cm.ColCount = 2;
     }
 
     void OnMove(InputValue value)
@@ -35,6 +38,25 @@ public class NewMonoBehaviourScript : MonoBehaviour
     
     void Update()
     {
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Collectible"))
+        {
+            Destroy(other.gameObject);
+            cm.ColCount--;
+        }
+        // if (other.gameObject.CompareTag("Exit")) && (cm.ColCount == 0)
+        // {
+            // UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        // }
+        
+        if (cm.ColCount == 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
         
     }
 }
