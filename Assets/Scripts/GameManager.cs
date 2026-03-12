@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Yarn.Unity;
 
 public class GameManager : MonoBehaviour {
   [Header("Game Elements")]
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour {
   [SerializeField] private Image levelSelectPrefab;
   [SerializeField] private GameObject playAgainButton;
 
+  [SerializeField] Timer timer;
+  [SerializeField] DialogueRunner dialogue;
+
   private List<Transform> pieces;
   private Vector2Int dimensions;
   private float width;
@@ -27,6 +31,10 @@ public class GameManager : MonoBehaviour {
   private Vector3 offset;
 
   private int piecesCorrect;
+  private float totalTime = 300f;
+
+  bool paused = false;
+
 
   void Start() {
     // Create the UI
@@ -166,29 +174,47 @@ public class GameManager : MonoBehaviour {
   }
 
   // Update is called once per frame
-  void Update() {
+  void Update()
+  {
+    if (paused)
+      return;
+
     var mouse = Mouse.current;
     if (mouse == null) return;
 
-    if (mouse.leftButton.wasPressedThisFrame) {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(mouse.position.ReadValue()), Vector2.zero);
-        if (hit) {
-            draggingPiece = hit.transform;
-            offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
-            offset += Vector3.back;
-        }
+    if (mouse.leftButton.wasPressedThisFrame)
+    {
+      RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(mouse.position.ReadValue()), Vector2.zero);
+      if (hit)
+      {
+        draggingPiece = hit.transform;
+        offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
+        offset += Vector3.back;
+      }
     }
 
-    if (draggingPiece && mouse.leftButton.wasReleasedThisFrame) {
-        SnapAndDisableIfCorrect();
-        draggingPiece.position += Vector3.forward;
-        draggingPiece = null;
+    if (draggingPiece && mouse.leftButton.wasReleasedThisFrame)
+    {
+      SnapAndDisableIfCorrect();
+      draggingPiece.position += Vector3.forward;
+      draggingPiece = null;
     }
 
-    if (draggingPiece) {
-        Vector3 newPosition = Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
-        newPosition += offset;
-        draggingPiece.position = newPosition;
+    if (draggingPiece)
+    {
+      Vector3 newPosition = Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
+      newPosition += offset;
+      draggingPiece.position = newPosition;
+    }
+
+    totalTime -= Time.deltaTime;
+    timer.updateTimer(totalTime);
+
+    if (totalTime <= 0)
+    {
+      timer.updateTimer(0);
+      dialogue.StartDialogue("Failed");
+      paused = true;
     }
   }
 

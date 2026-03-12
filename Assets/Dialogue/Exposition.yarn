@@ -33,3 +33,8 @@ title: Death
 Oh no! The killer caught up to you...
 ===
 
+title: Failed
+---
+You couldn't complete the puzzle in time...The killer has caught you.
+===
+
