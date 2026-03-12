@@ -1,0 +1,73 @@
+:root {
+}
+
+.ext-container {
+    flex-grow: 1;
+    justify-content: flex-end;
+    background-image: url("project://database/Assets/Textures/IMG_3336.png?fileID=2800000&guid=6bd5754641ba7254c8cf3a5348ce632b&type=3#IMG_3336");
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.82);
+}
+
+.dialogueBox {
+    min-width: auto;
+    width: 90%;
+    min-height: 30%;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-self: auto;
+    flex-direction: column;
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    left: 5%;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Unity.ttf?fileID=12800000&guid=f4eec857a4fdf2f43be0e9f3d1a984e7&type=3#Unity");
+    margin-bottom: 30px;
+    color: rgb(255, 237, 237);
+    background-color: rgba(25, 4, 4, 0.86);
+    border-left-color: rgba(80, 18, 18, 0.88);
+    border-right-color: rgba(80, 18, 18, 0.88);
+    border-top-color: rgba(80, 18, 18, 0.88);
+    border-bottom-color: rgba(80, 18, 18, 0.88);
+    white-space: normal;
+}
+
+.new2 {
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.new3 {
+    margin-bottom: 40px;
+}
+
+.new4 {
+    color: rgb(255, 237, 237);
+    background-color: rgba(25, 4, 4, 0.86);
+    border-left-color: rgba(80, 18, 18, 0.88);
+    border-right-color: rgba(80, 18, 18, 0.88);
+    border-top-color: rgba(80, 18, 18, 0.88);
+    border-bottom-color: rgba(80, 18, 18, 0.88);
+}
+
+.bg {
+    background-image: url("project://database/Assets/Textures/IMG_3336.png?fileID=2800000&guid=6bd5754641ba7254c8cf3a5348ce632b&type=3#IMG_3336");
+    -unity-background-image-tint-color: rgba(253, 213, 213, 0.82);
+}
+
+.new5 {
+    white-space: normal;
+}

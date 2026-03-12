@@ -37,6 +37,7 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
 
     [SerializeField]
     private bool debugText = false;
+
     
 
     public VisualElement root;
@@ -103,11 +104,19 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
 
     public override YarnTask OnDialogueCompleteAsync()
     {
+        if (hideWhenNotDisplaying)
+        {
+            document.rootVisualElement.style.display = DisplayStyle.None;
+        }
         return YarnTask.CompletedTask;
     }
 
     public override YarnTask OnDialogueStartedAsync()
     {
+        if (hideWhenNotDisplaying)
+        {
+            document.rootVisualElement.style.display = DisplayStyle.Flex;
+        }
         return YarnTask.CompletedTask;
     }
 
@@ -125,11 +134,6 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
             // it's finished presenting.
             Debug.LogWarning($"Can't show line '{line.Text.Text}': not active");
             //return
-        }
-
-        if (hideWhenNotDisplaying)
-        {
-            root.style.display = DisplayStyle.Flex;
         }
         
 
@@ -157,6 +161,7 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
         {
             await YarnTask.WaitUntilCanceled(token.NextContentToken).SuppressCancellationThrow();
         }
+
     }
 
 
@@ -185,6 +190,11 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
             document.rootVisualElement.styleSheets.Add(masterStyleSheet);
         if (individualStyleSheet != null)
             document.rootVisualElement.styleSheets.Add(individualStyleSheet);
+
+        if (hideWhenNotDisplaying)
+        {
+            document.rootVisualElement.style.display = DisplayStyle.None;
+        }
 
         VisualElement extContainer = new VisualElement();
 

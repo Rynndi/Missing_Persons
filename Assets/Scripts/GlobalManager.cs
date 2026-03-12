@@ -1,5 +1,7 @@
 using Pathfinding;
+using UnityEditor.MPE;
 using UnityEngine;
+using Yarn.Unity;
 
 public class GlobalManager : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class GlobalManager : MonoBehaviour
 
     [SerializeField]
     public PlayerController player;
+
+    [SerializeField]
+    public DialogueRunner dialogue;
 
     void Awake()
     {
@@ -25,7 +30,7 @@ public class GlobalManager : MonoBehaviour
     {
         GlobalEvents.onGameStart += StartGame;
         GlobalEvents.onPauseInvoked += PauseGame;
-        GlobalEvents.onCollected += PersonKilled;
+        GlobalEvents.onCollected += Collected;
         GlobalEvents.onResumeInvoked += ResumeGame;
         GlobalEvents.pauseButtonClicked += PauseButtonClicked;
         GlobalEvents.resumeButtonClicked += ResumeGameClicked;
@@ -35,7 +40,7 @@ public class GlobalManager : MonoBehaviour
     {
         GlobalEvents.onGameStart -= StartGame;
         GlobalEvents.onPauseInvoked -= PauseGame;
-        GlobalEvents.onCollected -= PersonKilled;
+        GlobalEvents.onCollected -= Collected;
         GlobalEvents.onResumeInvoked -= ResumeGame;
         GlobalEvents.pauseButtonClicked -= PauseButtonClicked;
         GlobalEvents.resumeButtonClicked -= ResumeGameClicked;
@@ -69,8 +74,32 @@ public class GlobalManager : MonoBehaviour
         ResumeGame();
     }
 
-    void PersonKilled()
+    void Collected()
     {
-        
+        if (player.count == 0)
+        {
+            dialogue.StartDialogue("Collectible3");
+        }
+        else if (6 - player.count > 3)
+        {
+            dialogue.StartDialogue("Collectible2");
+        }
+        else
+        {
+            dialogue.StartDialogue("Collectible");
+        }
+    }
+
+    public void InvokePause()
+    {
+        GlobalEvents.TriggerPauseInvoked();
+    }
+    public void InvokeResume()
+    {
+        if (player.count == 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);    
+        }
+        GlobalEvents.TriggerResumeInvoked();
     }
 }

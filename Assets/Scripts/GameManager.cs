@@ -215,7 +215,8 @@ public class GameManager : MonoBehaviour {
       // Increase the number of correct pieces, and check for puzzle completion.
       piecesCorrect++;
       if (piecesCorrect == pieces.Count) {
-        playAgainButton.SetActive(true);
+        //playAgainButton.SetActive(true);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Conclusion");
       }
     }
   }

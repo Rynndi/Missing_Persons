@@ -8,13 +8,12 @@ public class Checklist : UIElementTemplate
     Label checklistTitle;
     Row row1;
     Row row2;
-    Row row3;
-    Row row4;
+    int collectibleCount = 0;
 
 
     protected override void deinitListeners()
     {
-        
+        GlobalEvents.onCollected -= incrementCollectible;
     }
 
     protected override void generateContent()
@@ -23,20 +22,25 @@ public class Checklist : UIElementTemplate
         checklistTitle = Create<Label>("Title");
         checklistTitle.text = "Checklist";
         row1 = Create<Row>("Row");
-        row1.setText("Kill The Target");
+        row1.setText("Collect The Pieces 0/6");
         row2 = Create<Row>("Row");
-        row2.setText("Clean The Blood");
-        row3 = Create<Row>("Row");
-        row3.setText("Hide The Body");
-        row4 = Create<Row>("Row");
-        row4.setText("Falsify Evidence");
+        row2.setText("Put The Picture Together");
 
         checklistContainer.Add(checklistTitle);
         checklistContainer.Add(row1);
         checklistContainer.Add(row2);
-        checklistContainer.Add(row3);
-        checklistContainer.Add(row4);
 
         root.Add(checklistContainer);
+        GlobalEvents.onCollected += incrementCollectible;
+    }
+
+    public void incrementCollectible()
+    {
+        collectibleCount++;
+        row1.setText("Collect The Pieces " + collectibleCount + "/6");
+        if (collectibleCount == 6)
+        {
+            row1.checkCompleted();    
+        }
     }
 }

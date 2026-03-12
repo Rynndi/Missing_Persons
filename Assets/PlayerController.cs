@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 5.0f;
     Rigidbody2D rb;
 
-    int count = 6;
+    public int count = 6;
 
     bool paused;
 
@@ -61,16 +61,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             count--;
+            GlobalEvents.TriggerCollected();
         }
         // if (other.gameObject.CompareTag("Exit")) && (cm.ColCount == 0)
         // {
             // UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         // }
-        
-        if (count == 0)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-        }
-        
     }
 }

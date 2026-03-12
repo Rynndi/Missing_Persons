@@ -7,10 +7,10 @@ public static class GlobalEvents
     public static void TriggerGameStart() => onGameStart?.Invoke();
 
     public static event Action onPauseInvoked;
-    public static void TriggerPauseClicked() => onPauseInvoked?.Invoke();
+    public static void TriggerPauseInvoked() => onPauseInvoked?.Invoke();
 
     public static event Action onResumeInvoked;
-    public static void TriggerResumeClicked() => onResumeInvoked?.Invoke();
+    public static void TriggerResumeInvoked() => onResumeInvoked?.Invoke();
 
     public static event Action pauseButtonClicked;
     public static void TriggerPauseButtonClicked() => pauseButtonClicked?.Invoke();
@@ -19,5 +19,5 @@ public static class GlobalEvents
     public static void TriggerResumeButtonClicked() => resumeButtonClicked?.Invoke();
 
     public static event Action onCollected;
-    public static void TriggerPersonKilled() => onCollected?.Invoke();
+    public static void TriggerCollected() => onCollected?.Invoke();
 }
