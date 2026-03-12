@@ -31,7 +31,7 @@
     width: 120px;
     margin-bottom: 0;
     height: 35px;
-    -unity-background-image-tint-color: rgba(148, 126, 126, 0.75);
+    -unity-background-image-tint-color: rgba(148, 126, 126, 1);
     background-color: rgba(188, 188, 188, 0);
     border-top-width: 2px;
     border-right-width: 2px;
@@ -83,7 +83,7 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    background-color: rgba(64, 55, 55, 0.55);
+    background-color: rgba(64, 55, 55, 0.8);
 }
 
 .TextContainer {
@@ -115,7 +115,7 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    color: rgba(158, 14, 14, 0.42);
+    color: rgba(158, 14, 14, 0.84);
     -unity-font-definition: url("project://database/Assets/Samples/Yarn%20Spinner%20Samples/3.1.0/Theming%20Default%20Presenters/Art/Fonts/PixelifySans-Bold.ttf?fileID=12800000&guid=ce63ac8f394244ab488774c381029bd0&type=3#PixelifySans-Bold");
     font-size: 80px;
 }
@@ -126,7 +126,7 @@
     margin-left: 0;
     margin-bottom: 0;
     height: 35px;
-    -unity-background-image-tint-color: rgba(148, 126, 126, 0.75);
+    -unity-background-image-tint-color: rgba(148, 126, 126, 1);
     background-color: rgba(188, 188, 188, 0);
     border-top-width: 2px;
     border-right-width: 2px;

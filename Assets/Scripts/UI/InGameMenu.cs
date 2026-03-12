@@ -7,14 +7,14 @@ public class InGameMenu : UIElementTemplate
     Button pause;
     protected override void deinitListeners()
     {
-        settings.clicked -= GlobalEvents.TriggerSettingsClicked;
-        pause.clicked -= GlobalEvents.TriggerPauseClicked;
+        pause.clicked -= GlobalEvents.TriggerPauseButtonClicked;
+        GlobalEvents.pauseButtonClicked -= toggleVisibility;
+        GlobalEvents.resumeButtonClicked -= toggleVisibility;
     }
 
     protected override void generateContent()
     {
         container = Create("MenuContainer");
-        settings = Create<Button>("Settings");
         pause = Create<Button>("Pause");
 
         container.Add(settings);
@@ -22,7 +22,8 @@ public class InGameMenu : UIElementTemplate
 
         root.Add(container);
 
-        settings.clicked += GlobalEvents.TriggerSettingsClicked;
-        pause.clicked += GlobalEvents.TriggerPauseClicked;
+        pause.clicked += GlobalEvents.TriggerPauseButtonClicked;
+        GlobalEvents.pauseButtonClicked += toggleVisibility;
+        GlobalEvents.resumeButtonClicked += toggleVisibility;
     }
 }

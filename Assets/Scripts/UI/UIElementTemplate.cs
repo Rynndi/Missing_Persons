@@ -15,8 +15,12 @@ public abstract class UIElementTemplate : MonoBehaviour
     [SerializeField]
     private StyleSheet individualStyleSheet;
 
+    [SerializeField]
+    private bool initialVisibility = true;
+
     public VisualElement root;
-    public bool contentCompleted=false;
+    public bool contentCompleted = false;
+    private bool visible;
     
 
     void Start()
@@ -49,10 +53,16 @@ public abstract class UIElementTemplate : MonoBehaviour
         yield return null;
 
         document.rootVisualElement.Clear();
-        if(masterStyleSheet != null)
+        if (masterStyleSheet != null)
             document.rootVisualElement.styleSheets.Add(masterStyleSheet);
-        if(individualStyleSheet != null)
+        if (individualStyleSheet != null)
             document.rootVisualElement.styleSheets.Add(individualStyleSheet);
+
+        visible = initialVisibility;
+        if (!visible)
+        {
+            document.rootVisualElement.style.display = DisplayStyle.None;
+        }
 
         VisualElement extContainer = new VisualElement();
 
@@ -62,6 +72,19 @@ public abstract class UIElementTemplate : MonoBehaviour
         root = extContainer;
         generateContent();
         Debug.Log("progressed");
+    }
+
+    public void toggleVisibility()
+    {
+        if (visible)
+        {
+            document.rootVisualElement.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            document.rootVisualElement.style.display = DisplayStyle.Flex;
+        }
+        visible = !visible;
     }
 
 

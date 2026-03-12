@@ -1,10 +1,16 @@
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PauseMenu : UIElementTemplate
 {
+    Button resume, exit;
     protected override void deinitListeners()
     {
-        throw new System.NotImplementedException();
+        GlobalEvents.pauseButtonClicked -= toggleVisibility;
+        GlobalEvents.resumeButtonClicked -= toggleVisibility;
+        resume.clicked -= GlobalEvents.TriggerResumeButtonClicked;
+        exit.clicked -= Application.Quit;
+        exit.clicked -= stopEditor;
     }
 
     protected override void generateContent()
@@ -15,8 +21,8 @@ public class PauseMenu : UIElementTemplate
         Label titleText = Create<Label>("TitleText");
         titleText.text = "MISSING PERSONS";
         VisualElement buttonContainer = Create("BottomContainer");
-        Button exit = Create<Button>("Settings", "ExitButton");
-        Button resume = Create<Button>("Pause", "ResumeButton");
+        exit = Create<Button>("Settings", "ExitButton");
+        resume = Create<Button>("Pause", "ResumeButton");
 
         buttonContainer.Add(exit);
         buttonContainer.Add(resume);
@@ -24,5 +30,16 @@ public class PauseMenu : UIElementTemplate
         pauseMenu.Add(textContainer);
         pauseMenu.Add(buttonContainer);
         root.Add(pauseMenu);
+
+        GlobalEvents.pauseButtonClicked += toggleVisibility;
+        GlobalEvents.resumeButtonClicked += toggleVisibility;
+        resume.clicked += GlobalEvents.TriggerResumeButtonClicked;
+        exit.clicked += Application.Quit;
+        exit.clicked += stopEditor;
+    }
+
+    void stopEditor()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }

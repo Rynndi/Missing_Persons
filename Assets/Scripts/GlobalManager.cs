@@ -1,8 +1,14 @@
+using Pathfinding;
 using UnityEngine;
 
 public class GlobalManager : MonoBehaviour
 {
     public static GlobalManager Instance;
+    [SerializeField]
+    public AILerp seeker;
+
+    [SerializeField]
+    public PlayerController player;
 
     void Awake()
     {
@@ -18,15 +24,21 @@ public class GlobalManager : MonoBehaviour
     void OnEnable()
     {
         GlobalEvents.onGameStart += StartGame;
-        GlobalEvents.onPauseClicked += PauseGame;
-        GlobalEvents.onPersonKilled += PersonKilled;
+        GlobalEvents.onPauseInvoked += PauseGame;
+        GlobalEvents.onCollected += PersonKilled;
+        GlobalEvents.onResumeInvoked += ResumeGame;
+        GlobalEvents.pauseButtonClicked += PauseButtonClicked;
+        GlobalEvents.resumeButtonClicked += ResumeGameClicked;
     }
 
     void OnDisable()
     {
         GlobalEvents.onGameStart -= StartGame;
-        GlobalEvents.onPauseClicked -= PauseGame;
-        GlobalEvents.onPersonKilled -= PersonKilled;
+        GlobalEvents.onPauseInvoked -= PauseGame;
+        GlobalEvents.onCollected -= PersonKilled;
+        GlobalEvents.onResumeInvoked -= ResumeGame;
+        GlobalEvents.pauseButtonClicked -= PauseButtonClicked;
+        GlobalEvents.resumeButtonClicked -= ResumeGameClicked;
     }
 
     void StartGame()
@@ -36,7 +48,25 @@ public class GlobalManager : MonoBehaviour
 
     void PauseGame()
     {
+        seeker.pause();
+        player.pause();
+    }
 
+    void ResumeGame()
+    {
+        seeker.resume();
+        player.resume();
+    }
+
+    void PauseButtonClicked()
+    {
+        Debug.Log("pause attempted");
+        PauseGame();
+    }
+
+    void ResumeGameClicked()
+    {
+        ResumeGame();
     }
 
     void PersonKilled()

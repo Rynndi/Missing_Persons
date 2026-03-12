@@ -46,11 +46,26 @@ namespace Pathfinding {
 		/// Deprecated: This has been renamed to \reflink{autoRepath.interval}.
 		/// See: \reflink{AutoRepathPolicy}
 		/// </summary>
-		public float repathRate {
-			get {
+		/// 
+		bool paused;
+
+		public void pause()
+		{
+			paused = true;
+		}
+		public void resume()
+		{
+			paused = false;
+        }
+
+		public float repathRate
+		{
+			get
+			{
 				return this.autoRepath.interval;
 			}
-			set {
+			set
+			{
 				this.autoRepath.interval = value;
 			}
 		}
@@ -608,6 +623,8 @@ namespace Pathfinding {
 		}
 
 		protected virtual void Update () {
+			if (paused) return;
+
 			if (shouldRecalculatePath) SearchPath();
 			if (canMove) {
 				Vector3 nextPosition;

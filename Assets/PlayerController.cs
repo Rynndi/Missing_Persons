@@ -1,13 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-public class NewMonoBehaviourScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     float movementX;
     float movementY;
     [SerializeField] float speed = 5.0f;
     Rigidbody2D rb;
-    public ColManager cm;
+
+    int count = 6;
+
+    bool paused;
+
+		public void pause()
+		{
+			paused = true;
+		}
+		public void resume()
+		{
+			paused = false;
+        }
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,6 +42,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (paused) return;
+
         float movementDistanceX = movementX * speed * Time.deltaTime;
         float movementDistanceY = movementY * speed * Time.deltaTime;
         transform.position = new Vector2(transform.position.x + movementDistanceX, transform.position.y + movementDistanceY);
@@ -46,14 +60,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (other.gameObject.CompareTag("Collectible"))
         {
             Destroy(other.gameObject);
-            cm.ColCount--;
+            count--;
         }
         // if (other.gameObject.CompareTag("Exit")) && (cm.ColCount == 0)
         // {
             // UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         // }
         
-        if (cm.ColCount == 0)
+        if (count == 0)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
