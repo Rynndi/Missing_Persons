@@ -34,6 +34,9 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
 
     [SerializeField]
     private float typewriterSpeed = 0.03f;
+
+    [SerializeField]
+    private bool debugText = false;
     
 
     public VisualElement root;
@@ -87,7 +90,10 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
         generated = false;
         charName = Create<Label>("charName");
         typewriter = new YarnspinnerTypewriter(ActionMarkupHandlers, typewriterSpeed, "dialogueBox");
-        typewriter.text = "default text for testing";
+        if(debugText)
+        {
+            typewriter.text = "default text for testing";
+        }
         root.Add(charName);
         root.Add(typewriter);
         generated = true;
