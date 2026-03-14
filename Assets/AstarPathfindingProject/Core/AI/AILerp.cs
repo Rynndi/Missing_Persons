@@ -127,7 +127,7 @@ namespace Pathfinding {
 		public bool enableRotation = true;
 
 		/// <summary>How quickly to rotate</summary>
-		public float rotationSpeed = 10;
+		public float rotationSpeed = 5;
 
 		/// <summary>
 		/// If true, some interpolation will be done when a new path has been calculated.
