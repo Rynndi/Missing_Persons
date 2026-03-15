@@ -4,25 +4,46 @@ using UnityEngine.UIElements;
 public class PauseMenu : UIElementTemplate
 {
     Button resume, exit;
+
     protected override void deinitListeners()
     {
         GlobalEvents.pauseButtonClicked -= toggleVisibility;
         GlobalEvents.resumeButtonClicked -= toggleVisibility;
-        resume.clicked -= GlobalEvents.TriggerResumeButtonClicked;
-        exit.clicked -= Application.Quit;
-        exit.clicked -= stopEditor;
+
+        if (resume != null)
+            resume.clicked -= GlobalEvents.TriggerResumeButtonClicked;
+
+        if (exit != null)
+        {
+            exit.clicked -= Application.Quit;
+            exit.clicked -= stopEditor;
+        }
     }
 
     protected override void generateContent()
     {
+        if (root == null)
+        {
+            Debug.LogError("PauseMenu root is null");
+            return;
+        }
+
         root.AddToClassList("PauseRoot");
+
         VisualElement pauseMenu = Create("ChecklistRoot", "PausePopup");
         VisualElement textContainer = Create("TextContainer");
         Label titleText = Create<Label>("TitleText");
-        titleText.text = "MISSING PERSONS";
         VisualElement buttonContainer = Create("BottomContainer");
         exit = Create<Button>("Settings", "ExitButton");
         resume = Create<Button>("Pause", "ResumeButton");
+
+        if (pauseMenu == null || textContainer == null || titleText == null || buttonContainer == null || exit == null || resume == null)
+        {
+            Debug.LogError("PauseMenu failed to create one or more UI elements");
+            return;
+        }
+
+        titleText.text = "MISSING PERSONS";
 
         buttonContainer.Add(exit);
         buttonContainer.Add(resume);
@@ -40,6 +61,8 @@ public class PauseMenu : UIElementTemplate
 
     void stopEditor()
     {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }
