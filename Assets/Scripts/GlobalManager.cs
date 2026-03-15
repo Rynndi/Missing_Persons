@@ -46,13 +46,13 @@ public class GlobalManager : MonoBehaviour
 
     void PauseGame()
     {
-        //seeker.pause();
+        seeker.pause();
         player.pause();
     }
 
     void ResumeGame()
     {
-        //seeker.resume();
+        seeker.resume();
         player.resume();
     }
 

@@ -29,6 +29,7 @@ public class PauseMenu : UIElementTemplate
             Debug.LogError("PauseMenu root is null");
             return;
         }
+        Debug.Log("xdd");
 
         root.AddToClassList("PauseRoot");
 
