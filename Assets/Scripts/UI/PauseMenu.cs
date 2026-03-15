@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 public class PauseMenu : UIElementTemplate
 {
     Button resume, exit;
+    Slider volume;
+    
     protected override void deinitListeners()
     {
         GlobalEvents.pauseButtonClicked -= toggleVisibility;
@@ -23,6 +26,14 @@ public class PauseMenu : UIElementTemplate
         VisualElement buttonContainer = Create("BottomContainer");
         exit = Create<Button>("Settings", "ExitButton");
         resume = Create<Button>("Pause", "ResumeButton");
+        volume = new Slider("Volume", 0, 1);
+        volume.value = AudioManager.Instance.currentVol;
+        volume.direction = SliderDirection.Horizontal;
+        volume.AddToClassList("Volume");
+        volume.RegisterCallback<ChangeEvent<float>>((evt) =>
+        {
+            AudioManager.Instance.SetMasterVolume(evt.newValue);
+        });
 
         buttonContainer.Add(exit);
         buttonContainer.Add(resume);
@@ -37,6 +48,8 @@ public class PauseMenu : UIElementTemplate
         exit.clicked += Application.Quit;
         exit.clicked += stopEditor;
     }
+
+    
 
     void stopEditor()
     {
