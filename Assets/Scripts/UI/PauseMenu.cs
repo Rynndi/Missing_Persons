@@ -39,7 +39,7 @@ public class PauseMenu : UIElementTemplate
         exit = Create<Button>("Settings", "ExitButton");
         resume = Create<Button>("Pause", "ResumeButton");
         volume = new Slider("Volume", 0, 1);
-        volume.value = AudioManager.Instance.currentVol;
+        volume.value = AudioManager.Instance.getVolume();
         volume.direction = SliderDirection.Horizontal;
         volume.AddToClassList("Volume");
         volume.RegisterCallback<ChangeEvent<float>>((evt) =>
@@ -59,6 +59,7 @@ public class PauseMenu : UIElementTemplate
         buttonContainer.Add(resume);
         textContainer.Add(titleText);
         pauseMenu.Add(textContainer);
+        pauseMenu.Add(volume);
         pauseMenu.Add(buttonContainer);
         root.Add(pauseMenu);
 

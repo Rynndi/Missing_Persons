@@ -4,12 +4,13 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+    public float currentVol;
+
     [SerializeField]
     public AudioMixer mixer;
 
     public const string MasterVolumeKey = "MasterVolume";
 
-    public float currentVol;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -25,7 +26,12 @@ public class AudioManager : MonoBehaviour
     {
         currentVol = PlayerPrefs.GetFloat(MasterVolumeKey, 0.75f);
         SetMasterVolume(currentVol);
-     }
+    }
+
+    public float getVolume()
+    {
+        return currentVol;    
+    }
 
     public void SetMasterVolume(float percentage)
     {
