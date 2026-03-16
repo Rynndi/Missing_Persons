@@ -1289,6 +1289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   currentVol: 0
   mixer: {fileID: 24100000, guid: 8cc78e409d66664449f79d317bdfde2b, type: 2}
+  background: {fileID: 0}
 --- !u!4 &596191362
 Transform:
   m_ObjectHideFlags: 0
@@ -4922,7 +4923,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 168
-  orthographic: 1
+  orthographic: 0
   orthographic size: 6
   m_Depth: -1
   m_CullingMask:
