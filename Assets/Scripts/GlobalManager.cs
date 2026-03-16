@@ -124,6 +124,7 @@ public class GlobalManager : MonoBehaviour
     }
     public void InvokeResume()
     {
+        Debug.Log("Invoke Resume called");
         GlobalEvents.TriggerResumeInvoked();
         if (player.count == 0)
         {
@@ -138,6 +139,7 @@ public class GlobalManager : MonoBehaviour
         }
         if (player.nextScene && StateManager.Instance.phase == 1)
         {
+            Debug.Log("working?");
             player.nextScene = false;
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("InkScene");
             this.enabled = false;
