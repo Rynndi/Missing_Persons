@@ -1,0 +1,26 @@
+title: KillerIntro
+---
+You enter the house and find an odd creature staring at you. This was the source of your sense of dread.
+But you can also sense something else. There are what feels like pieces of your heart scattered around this house.
+Maybe if you collect them you can uncover the truth of what you are doing here.
+The odd creature begins chasing you. You must flee.
+===
+
+title: CollectedIntro
+---
+Somehow, after completing the puzzle you find yourself back at the entrance of the manor.
+You have collected all the pieces, and you feel yourself getting closer to the answer, but the killer is still chasing you.
+Maybe the exit to the back garden is open to you now...
+===
+
+
+title: BackGarden
+---
+By the skin of your teeth, you escape from the creature chasing you...
+===
+
+title: CannotEnter
+---
+This feels like where you are supposed to go, but you feel as though you cannot enter yet.
+Maybe you have to finish gathering the pieces.
+===

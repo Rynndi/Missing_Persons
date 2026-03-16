@@ -1,6 +1,7 @@
 using Pathfinding;
 using UnityEditor.MPE;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Yarn.Unity;
 
 public class GlobalManager : MonoBehaviour
@@ -13,7 +14,6 @@ public class GlobalManager : MonoBehaviour
 
     [SerializeField]
     public DialogueRunner dialogue;
-
 
     private bool dead = false;
 
@@ -41,19 +41,42 @@ public class GlobalManager : MonoBehaviour
 
     void StartGame()
     {
-        
+        if (SceneManager.GetActiveScene().name == "InkScene" && StateManager.Instance.phase == 1)
+        {
+            dialogue.StartDialogue("KillerIntro");
+        }
+        if (SceneManager.GetActiveScene().name == "InkScene" && StateManager.Instance.phase == 2)
+        {
+            dialogue.StartDialogue("CollectedIntro");
+        }
+        if (SceneManager.GetActiveScene().name == "BackGarden" && StateManager.Instance.phase == 2)
+        {
+            dialogue.StartDialogue("BackGarden");
+        }
     }
 
     void PauseGame()
     {
-        seeker.pause();
-        player.pause();
+        if (seeker != null)
+        {
+            seeker.pause();
+        }
+        if (player != null)
+        {
+            player.pause();
+        }
     }
 
     void ResumeGame()
     {
-        seeker.resume();
-        player.resume();
+        if (seeker != null)
+        {
+            seeker.resume();
+        }
+        if (player != null)
+        {
+            player.resume(); 
+        }
     }
 
     void PauseButtonClicked()
@@ -89,15 +112,26 @@ public class GlobalManager : MonoBehaviour
     }
     public void InvokeResume()
     {
+        GlobalEvents.TriggerResumeInvoked();
         if (player.count == 0)
         {
+            StateManager.Instance.phase = 2;
+            StateManager.Instance.storedPos = player.gameObject.transform.position;
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
         }
-        if(dead)
+        if (dead)
         {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        }
+        if (player.nextScene && StateManager.Instance.phase == 1)
+        {
+            player.nextScene = false;
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("InkScene");
         }
-        GlobalEvents.TriggerResumeInvoked();
+        else if (player.nextScene && StateManager.Instance.phase == 2)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("BackGarden");
+        }
     }
 
     public void deathOccurred()

@@ -21,10 +21,29 @@ public class Checklist : UIElementTemplate
         checklistContainer = Create("ChecklistRoot");
         checklistTitle = Create<Label>("Title");
         checklistTitle.text = "Checklist";
-        row1 = Create<Row>("Row");
-        row1.setText("Collect The Pieces 0/6");
-        row2 = Create<Row>("Row");
-        row2.setText("Put The Picture Together");
+
+        if (StateManager.Instance == null)
+        {
+            row1 = Create<Row>("Row");
+            row1.setText("Collect The Pieces 0/6");
+            row2 = Create<Row>("Row");
+            row2.setText("Put The Picture Together");
+        }
+        else if (StateManager.Instance.phase == 1)
+        {
+            row1 = Create<Row>("Row");
+            row1.setText("Collect The Pieces 0/6");
+            row2 = Create<Row>("Row");
+            row2.setText("Put The Picture Together");
+        }
+        else
+        {
+            row1 = Create<Row>("Row");
+            row1.setText("Put The Picture Together");
+            row1.checkCompleted();
+            row2 = Create<Row>("Row");
+            row2.setText("Enter The Back Garden");
+        }
 
         checklistContainer.Add(checklistTitle);
         checklistContainer.Add(row1);

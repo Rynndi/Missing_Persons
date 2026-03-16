@@ -29,7 +29,7 @@ public partial class Row : VisualElement
 
     public void checkCompleted()
     {
-        image.style.unityBackgroundImageTintColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        image.style.unityBackgroundImageTintColor = new Color(1.0f, 1.0f, 1.0f, 0.65f);
         image.style.backgroundImage = altSprite;
         image.style.opacity = 1;
     }
@@ -47,7 +47,7 @@ public partial class Row : VisualElement
         Add(textbox);
         Add(imageContainer);
 
-        altSprite = Resources.Load<Texture2D>("checkbox completed");
+        altSprite = Resources.Load<Texture2D>("checkboxComplete");
     }
 
     public T Create<T>(params string[] classnames) where T : VisualElement, new()

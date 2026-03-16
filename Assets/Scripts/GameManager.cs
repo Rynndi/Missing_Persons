@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour {
   [SerializeField] private Image levelSelectPrefab;
   [SerializeField] private GameObject playAgainButton;
 
-  [SerializeField] Timer timer;
   [SerializeField] DialogueRunner dialogue;
 
   private List<Transform> pieces;
@@ -206,16 +205,6 @@ public class GameManager : MonoBehaviour {
       newPosition += offset;
       draggingPiece.position = newPosition;
     }
-
-    totalTime -= Time.deltaTime;
-    timer.updateTimer(totalTime);
-
-    if (totalTime <= 0)
-    {
-      timer.updateTimer(0);
-      dialogue.StartDialogue("Failed");
-      paused = true;
-    }
   }
 
   private void SnapAndDisableIfCorrect() {
@@ -242,7 +231,7 @@ public class GameManager : MonoBehaviour {
       piecesCorrect++;
       if (piecesCorrect == pieces.Count) {
         //playAgainButton.SetActive(true);
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Conclusion");
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("InkScene");
       }
     }
   }

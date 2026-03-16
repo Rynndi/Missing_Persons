@@ -8,12 +8,12 @@ public class SceneLoader : MonoBehaviour
 
     public void transitionScene(string scene)
     {
-        SceneManager.LoadSceneAsync(scene);
+        SceneManager.LoadScene(scene);
     }
 
     public void transitionScene()
     {
-        SceneManager.LoadSceneAsync(nextScene);    
+        SceneManager.LoadScene(nextScene);    
     }
 
 }
