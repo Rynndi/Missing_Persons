@@ -51,7 +51,7 @@ public class GlobalManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "BackGarden" && StateManager.Instance.phase == 2)
         {
-            dialogue.StartDialogue("BackGarden");
+            dialogue.StartDialogue("Outro");
         }
     }
 
