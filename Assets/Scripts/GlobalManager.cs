@@ -40,7 +40,7 @@ public class GlobalManager : MonoBehaviour
     }
 
     void StartGame()
-    {
+    { 
         if (SceneManager.GetActiveScene().name == "InkScene" && StateManager.Instance.phase == 1)
         {
             dialogue.StartDialogue("KillerIntro");
@@ -117,25 +117,34 @@ public class GlobalManager : MonoBehaviour
         {
             StateManager.Instance.phase = 2;
             StateManager.Instance.storedPos = player.gameObject.transform.position;
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
         if (dead)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            dialogue.Stop();
+            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            dead = false;
         }
         if (player.nextScene && StateManager.Instance.phase == 1)
         {
+            dialogue.Stop();
             player.nextScene = false;
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("InkScene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("InkScene");
         }
         else if (player.nextScene && StateManager.Instance.phase == 2)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("BackGarden");
+            dialogue.Stop();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("BackGarden");
         }
+
+        seeker = FindAnyObjectByType<AILerp>();
+        player = FindAnyObjectByType<PlayerController>();
+        dialogue = FindAnyObjectByType<DialogueRunner>();
     }
 
     public void deathOccurred()
     {
+        Debug.Log("DEATH");
         dialogue.StartDialogue("Death");
         dead = true;
     }
