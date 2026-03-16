@@ -17,6 +17,18 @@ public class GlobalManager : MonoBehaviour
 
     private bool dead = false;
 
+    void Awake(){
+        seeker = FindObjectOfType<AILerp>();
+
+        player = FindObjectOfType<PlayerController>();
+
+        dialogue = FindObjectOfType<DialogueRunner>();
+
+
+    }
+
+
+
     void OnEnable()
     {
         GlobalEvents.onGameStart += StartGame;
@@ -122,11 +134,13 @@ public class GlobalManager : MonoBehaviour
         if (dead)
         {
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            this.enabled = false;
         }
         if (player.nextScene && StateManager.Instance.phase == 1)
         {
             player.nextScene = false;
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("InkScene");
+            this.enabled = false;
         }
         else if (player.nextScene && StateManager.Instance.phase == 2)
         {
