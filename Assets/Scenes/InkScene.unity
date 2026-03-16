@@ -1686,6 +1686,9 @@ MonoBehaviour:
   seeker: {fileID: 789854400}
   player: {fileID: 1769712215}
   dialogue: {fileID: 1828468627}
+  playerSpawn: {fileID: 0}
+  killerSpawn: {fileID: 0}
+  killerObject: {fileID: 0}
 --- !u!4 &743482858
 Transform:
   m_ObjectHideFlags: 0
@@ -4921,7 +4924,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 147.6
+  field of view: 168
   orthographic: 0
   orthographic size: 6
   m_Depth: -1
