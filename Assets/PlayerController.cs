@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     DialogueRunner dialogue;
     Rigidbody2D rb;
 
-    //comment out for now 
-    // Animator animator;
+    
+    Animator animator;
 
 
     public int count = 6;
@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.transform.position = StateManager.Instance.storedPos;
         }
-        //comment out for now
-        // animator = GetComponent<Animator>();
+        
+        animator = GetComponent<Animator>();
         
       
     }
@@ -71,21 +71,18 @@ public class PlayerController : MonoBehaviour
             //comment out for now
         if (paused) return;
 
-        // animator.SetBool("up", movementY > 0);
-        // animator.SetBool("down", movementY < 0);
-        // animator.SetBool("right", movementX > 0);
-        // animator.SetBool("left", movementX < 0);
+     
 
-        //float movementDistanceX = movementX * speed * Time.deltaTime;
-        //float movementDistanceY = movementY * speed * Time.deltaTime;
+        float movementDistanceX = movementX * speed * Time.deltaTime;
+        float movementDistanceY = movementY * speed * Time.deltaTime;
 
         var keyboard = Keyboard.current;
         var gamepad = Gamepad.current;
 
+        Vector2 moveDirection = Vector2.zero;
         if (keyboard != null)
         {
             // Read WASD as a Vector2
-            Vector2 moveDirection = Vector2.zero;
             if (keyboard.wKey.isPressed) moveDirection.y += 1;
             if (keyboard.sKey.isPressed) moveDirection.y -= 1;
             if (keyboard.aKey.isPressed) moveDirection.x -= 1;
@@ -94,7 +91,10 @@ public class PlayerController : MonoBehaviour
             // Apply movement (example)
             transform.Translate(moveDirection * Time.deltaTime * 5f);
         }
-
+        animator.SetBool("up", moveDirection.y > 0);
+        animator.SetBool("down", moveDirection.y < 0);
+        animator.SetBool("right", moveDirection.x > 0);
+        animator.SetBool("left", moveDirection.x < 0);
         /*transform.position = new Vector2(
             transform.position.x + movementDistanceX,
             transform.position.y + movementDistanceY
