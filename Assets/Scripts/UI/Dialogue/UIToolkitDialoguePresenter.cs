@@ -204,5 +204,6 @@ public class UIToolkitDialoguePresenter : DialoguePresenterBase
         root = extContainer;
         generateContent();
         Debug.Log("progressed");
+        GlobalEvents.TriggerGameStart();
     }
 }
