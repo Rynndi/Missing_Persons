@@ -8,8 +8,11 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     public AudioMixer mixer;
+    [SerializeField]
+    public AudioClip background;
 
     public const string MasterVolumeKey = "MasterVolume";
+    bool playing = false;
 
     void Awake()
     {
@@ -35,6 +38,11 @@ public class AudioManager : MonoBehaviour
 
     public void SetMasterVolume(float percentage)
     {
+        if (!playing)
+        {
+            PlayMusic();
+        }
+
         mixer.SetFloat("MasterVolume", ConvertToDecibel(percentage));
         currentVol = percentage;
         PlayerPrefs.SetFloat(MasterVolumeKey, currentVol);
@@ -50,6 +58,17 @@ public class AudioManager : MonoBehaviour
         else
         {
             return -80f;
+        }
+    }
+
+    public void PlayMusic()
+    {
+        playing = true;
+        AudioSource source = GetComponent<AudioSource>();
+        if (source != null)
+        {
+            source.clip = background;
+            source.Play();
         }
     }
      
