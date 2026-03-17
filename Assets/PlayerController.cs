@@ -31,50 +31,35 @@ public class PlayerController : MonoBehaviour
         }
     
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
-    //     PlayerInput playerInput = GetComponent<PlayerInput>();
-    //     if (playerInput != null)
-    //     {
-    //         playerInput.enabled = false;
-    //         playerInput.enabled = true;
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("not found");
-    //     }
-
-    //     rb = GetComponent<Rigidbody2D>();
-    //     if (StateManager.Instance.phase == 2 && StateManager.Instance.storedPos.x != 0)
-    //     {
-    //         gameObject.transform.position = StateManager.Instance.storedPos;
-    //     }
-        
-    //     animator = GetComponent<Animator>();
-        
-      
-    // }
+  
     void Start(){
 
+        PlayerInput playerInput = GetComponent<PlayerInput>(); 
+        if (playerInput != null) { 
+            playerInput.enabled = false; 
+            playerInput.enabled = true;
+        }
+        else { 
+            Debug.Log("not found");
+        }
 
-    rb = GetComponent<Rigidbody2D>();
-    if (rb == null)
-    {
-        Debug.LogError("PlayerController: Rigidbody2D not found.");
-    }
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("PlayerController: Rigidbody2D not found.");
+        }
 
-    animator = GetComponent<Animator>();
-    if (animator == null)
-    {
-        Debug.LogError("PlayerController: Animator not found.");
-    }
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("PlayerController: Animator not found.");
+        }
 
-    if (StateManager.Instance != null && StateManager.Instance.phase == 2 && StateManager.Instance.storedPos.x != 0)
-    {
-        transform.position = StateManager.Instance.storedPos;
+        if (StateManager.Instance != null && StateManager.Instance.phase == 2 && StateManager.Instance.storedPos.x != 0)
+        {
+            transform.position = StateManager.Instance.storedPos;
+        }
     }
-}
 
     void OnMove(InputValue value)
     {
@@ -125,19 +110,10 @@ public class PlayerController : MonoBehaviour
 {
     if (paused) return;
 
-    var keyboard = Keyboard.current;
-    Vector2 moveDirection = Vector2.zero;
+    // var keyboard = Keyboard.current;
+    Vector2 moveDirection = new Vector2(movementX, movementY);
 
-    if (keyboard != null)
-    {
-        if (keyboard.wKey.isPressed) moveDirection.y += 1;
-        if (keyboard.sKey.isPressed) moveDirection.y -= 1;
-        if (keyboard.aKey.isPressed) moveDirection.x -= 1;
-        if (keyboard.dKey.isPressed) moveDirection.x += 1;
-
-        transform.Translate(moveDirection.normalized * speed * Time.deltaTime);
-    }
-
+    transform.Translate(moveDirection.normalized * speed * Time.deltaTime); 
     if (animator != null)
     {
         animator.SetBool("up", moveDirection.y > 0);
