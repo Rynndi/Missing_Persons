@@ -412,7 +412,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 523123833}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 102900000, guid: 3ab4b43cfe43a4c3e8a8768589413955, type: 3}
+        m_TargetAssemblyTypeName: UnityEditor.SceneAsset, UnityEditor.CoreModule
+        m_MethodName: set_name
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &523123833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   currentVol: 0
   mixer: {fileID: 24100000, guid: 8cc78e409d66664449f79d317bdfde2b, type: 2}
+  background: {fileID: 0}
 --- !u!4 &1285017446
 Transform:
   m_ObjectHideFlags: 0
